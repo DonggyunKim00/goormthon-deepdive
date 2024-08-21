@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>groom task</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      header {
+        background-color: gray;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      main {
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        font-size: large;
+      }
+
+      .text-input {
+        display: block;
+        margin: 10px 0px;
+        padding: 10px 5px;
+        border-radius: 5px;
+        border: 1px solid #dedede;
+        width: 100%;
+      }
+
+      .submit-button {
+        padding: 8px;
+        background-color: cornflowerblue;
+        color: white;
+        border: none;
+        border-radius: 7px;
+      }
+
+      h4 {
+        margin: 30px 0px 0px;
+      }
+      ul {
+        margin: 0px;
+      }
+
+      .checkbox-div {
+        margin: 1rem 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <header><h1>SignUp</h1></header>
+
+      <main>
+        <form>
+          <div>
+            <input
+              type="text"
+              placeholder="아이디 / 이메일"
+              class="text-input"
+            />
+          </div>
+          <div>
+            <input type="password" placeholder="비밀번호" class="text-input" />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="비밀번호 확인"
+              class="text-input"
+            />
+          </div>
+
+          <h4>직업</h4>
+          <ul>
+            <li>
+              <label for="student">
+                <input type="radio" id="student" name="job" value="S" />
+                <span>학생</span>
+              </label>
+            </li>
+            <li>
+              <label for="worker">
+                <input type="radio" id="worker" name="job" value="W" />
+                <span>직장인</span>
+              </label>
+            </li>
+            <li>
+              <label for="noneWorker">
+                <input type="radio" id="noneWorker" name="job" value="N" />
+                <span>무직</span>
+              </label>
+            </li>
+          </ul>
+
+          <div>
+            <div class="checkbox-div">
+              <label>
+                <input type="checkbox" />
+                <span>개인정보 수집에 동의하십니까?</span>
+              </label>
+            </div>
+            <div>
+              <button type="submit" class="submit-button">회원가입</button>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>

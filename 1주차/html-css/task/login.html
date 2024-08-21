@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>groom task</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      header {
+        background-color: gray;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        font-size: large;
+      }
+
+      .text-input {
+        display: block;
+        margin: 10px 0px;
+        padding: 10px 5px;
+        border-radius: 5px;
+        border: 1px solid #dedede;
+      }
+
+      .submit-button {
+        padding: 8px;
+        background-color: cornflowerblue;
+        color: white;
+        border: none;
+        border-radius: 7px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <header><h1>Login</h1></header>
+
+      <main>
+        <h2>로그인 폼</h2>
+        <form>
+          <div>
+            <input
+              type="text"
+              placeholder="아이디 / 이메일"
+              class="text-input"
+            />
+          </div>
+          <div>
+            <input type="password" placeholder="비밀번호" class="text-input" />
+          </div>
+
+          <div>
+            <button type="submit" class="submit-button">로그인</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
