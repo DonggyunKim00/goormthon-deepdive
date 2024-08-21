@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>groom task</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      header {
+        background-color: gray;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .text-input {
+        display: block;
+        margin: 10px 0px;
+        padding: 10px 5px;
+        border-radius: 5px;
+        border: 1px solid #dedede;
+      }
+
+      nav {
+        background-color: whitesmoke;
+        color: black;
+        text-align: center;
+        height: 10vh;
+        display: flex;
+        align-items: center;
+      }
+
+      main {
+        padding: 1rem;
+        font-size: large;
+      }
+
+      footer {
+        background-color: gray;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+      }
+
+      .submit-button {
+        padding: 8px;
+        background-color: cornflowerblue;
+        color: white;
+        border: none;
+        border-radius: 7px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <header><h1>Form</h1></header>
+
+      <main>
+        <h2>Form</h2>
+        <form>
+          <input type="text" placeholder="아이디 / 이메일" class="text-input" />
+          <input type="password" placeholder="비밀번호" class="text-input" />
+
+          <ul>
+            <li>
+              <label for="title_1">
+                <input type="radio" id="title_1" name="title" value="K" />
+                <span>title_1</span>
+              </label>
+            </li>
+            <li>
+              <label for="title_2">
+                <input type="radio" id="title_2" name="title" value="Q" />
+                <span>title_2</span>
+              </label>
+            </li>
+            <li>
+              <label for="title_3">
+                <input type="radio" id="title_3" name="title" value="J" />
+                <span>title_3</span>
+              </label>
+            </li>
+          </ul>
+
+          <div>
+            <button type="submit" class="submit-button">submit</button>
+          </div>
+        </form>
+      </main>
+
+      <footer><h3>Footer</h3></footer>
+    </div>
+  </body>
+</html>
