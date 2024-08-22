@@ -1,0 +1,30 @@
+:root {
+  font-size: 15px;
+
+  --font-background-black: black;
+  --font-background-green: green;
+  --main-font-color: white;
+  --button-padding: 1rem;
+}
+
+.nav-link:hover {
+  background-color: var(--font-background-green);
+  color: var(--main-font-color);
+}
+
+header {
+  border-bottom: 1px solid #dedede;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  height: 10vh;
+  background-color: var(--font-background-green);
+  font-size: 1.5rem;
+  color: var(--main-font-color);
+  width: 100%;
+}
