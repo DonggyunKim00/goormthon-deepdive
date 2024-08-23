@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web</title>
+    <style>
+      body {
+        margin: 0px;
+      }
+      .blackboard {
+        width: 700px;
+        min-height: 400px;
+        background-color: darkgreen;
+        padding: 2rem;
+        box-sizing: border-box;
+        color: white;
+      }
+      input {
+        width: 700px;
+        height: 40px;
+        box-sizing: border-box;
+        padding: 0px 1rem;
+      }
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10vh;
+        background-color: lightblue;
+      }
+      .title {
+        margin: 0px;
+      }
+      footer {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        height: 10vh;
+        background-color: lightblue;
+        width: 100%;
+        bottom: 0;
+        padding-left: 30px;
+        font-weight: 600;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+      }
+      li {
+        margin: 1rem 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1 class="title">칠판</h1></header>
+
+    <main>
+      <div class="blackboard">
+        <ul id="inner"></ul>
+      </div>
+      <form id="form">
+        <input id="formInput" type="text" placeholder="텍스트 입력" />
+      </form>
+    </main>
+
+    <footer>copyright 동균</footer>
+
+    <script>
+      document.querySelector('#form').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const inner = document.querySelector('#inner');
+        const input = document.querySelector('#formInput');
+        const item = document.createElement('li');
+
+        item.innerText = input.value;
+        inner.appendChild(item);
+        input.value = '';
+      });
+    </script>
+  </body>
+</html>
