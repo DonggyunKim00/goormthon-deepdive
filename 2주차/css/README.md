@@ -35,4 +35,32 @@
 - relative : 자기 자신을 기준으로 이동
 - absolute : 상단의 static을 제외한 position 속성이 있는 것을 기준으로 이동
 - fixed :
-- sticky :
+- sticky : 요소 사용자의 스크롤 위치를 기준으로 배치 (static + fixed)
+
+#### 미디어 쿼리
+
+- viewport 를 기준으로 변화함
+- @media [only 또는 not] [미디어 유형] [and 또는 ,] (조건문) {실행문}
+- @media (min-width:500px) and (max-width: 1000px){}
+- @media (500px <= width <= 1000px){}
+
+#### -webkit
+
+- webkit- : 구글, 사파리 브라우저에 적용
+- moz- : 파이어폭스 브라우저에 적용
+- ms- : 익스플로러에 적용
+- o- : 오페라 브라우저에 적용
+
+#### Grid CSS
+
+- 2차원(행과 열)의 레이아웃 시스템 제공
+
+- **컨테이너 속성**
+  - grid-template-columns: repeat(5,10px);
+  - grid-template-rows : 300px 10% 1fr 1fr;
+  - grid-template-areas
+- **아이템 속성**
+  - grid-column-start, grid-column-end
+  - grid-row-start, grid-row-end
+  - grid-column, grid-row
+  - grid-area
