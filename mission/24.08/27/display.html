@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        background-color: black;
+        width: fit-content;
+        padding: 3rem;
+        margin: 3rem;
+      }
+
+      /* none: DOM Tree에는 존재하지만 Render Tree에는 포함되지 않음 */
+      /* 💡 visibility: hidden; 속성은 Render Tree에 포함이 됨 */
+      .item1 {
+        background-color: lightblue;
+        display: none;
+      }
+
+      /* inline: 좌우로 다른 태그가 나란히 위치할 수 있음 */
+      .item2 {
+        background-color: lightcoral;
+        display: inline;
+        width: 100px;
+        height: 100px;
+      }
+
+      /* inline-block: inline과 다르게 block 요소에 적용되는 width, height, margin, padding이 적용됨 */
+      /* 요소: button, input 등등  */
+      .item3 {
+        background-color: lightgreen;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+      }
+
+      /* block: 혼자 한 줄을 차지하는 요소 */
+      /* 요소: h1, p, div 등등 */
+      .item4 {
+        background-color: lightslategray;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- none 요소 모음 -->
+    <div class="container">
+      <div class="item1">item1</div>
+      <div class="item1">item2</div>
+      <div class="item1">item3</div>
+      <div class="item1">item4</div>
+    </div>
+
+    <!-- inline 요소 모음 -->
+    <div class="container">
+      <div class="item2">item1</div>
+      <div class="item2">item2</div>
+      <div class="item2">item3</div>
+      <div class="item2">item4</div>
+    </div>
+
+    <!-- inline-block 요소 모음 -->
+    <div class="container">
+      <div class="item3">item1</div>
+      <div class="item3">item2</div>
+      <div class="item3">item3</div>
+      <div class="item3">item4</div>
+    </div>
+
+    <!-- block 요소 모음 -->
+    <div class="container">
+      <div class="item4">item1</div>
+      <div class="item4">item2</div>
+      <div class="item4">item3</div>
+      <div class="item4">item4</div>
+    </div>
+  </body>
+</html>
