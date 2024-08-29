@@ -64,3 +64,21 @@
   - grid-row-start, grid-row-end
   - grid-column, grid-row
   - grid-area
+- auto
+  - auto-fill : 새로운 같은 크기의 아이템이 채워짐
+  - auto-fit : 이미 존재하는 아이템의 크기가 늘어남
+
+#### 이미지
+
+- img
+  - w유닛을 사용하는 이유는 작은 화면의 브라우저가 굳이 큰 이미지를 보여줄 필요가 없기 때문이다.
+  - srcset : 실제로 그 크기일때 사용하지만 이미 로드된것이 있으면 그것을 사용
+- picture
+  - srcset : 실제로 그 크기일때 사용
+
+#### initial, inherited, unset, revert
+
+- initial : 실제 원래의 속성 값 (display의 기본값은 inline, 브라우저의 기본값은 block)
+- inherited : 스타일을 상속함, 요소마다 다름
+- unset : 속성값에 따라서 상속이 되는것들은 inherited 아닌것들은 initial
+- revert : 속성의 일부/전체를 브라우저 기본값으로 사용
