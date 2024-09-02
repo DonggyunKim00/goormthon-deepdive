@@ -4,26 +4,26 @@ let data;
 
 // 원시타입(Primitive Type)
 data = 'hello';
-console.log(typeof data);
+console.log(typeof data); // string
 
 data = 123;
-console.log(typeof data);
+console.log(typeof data); // number
 
 data = true;
-console.log(typeof data);
+console.log(typeof data); // boolean
 
 data = null;
-console.log(typeof data);
+console.log(typeof data); // object
 
 data = undefined;
-console.log(typeof data);
+console.log(typeof data); // undefined
 
 data = Symbol();
-console.log(typeof data);
+console.log(typeof data); // symbol
 
 // 참조 타입(Object Type)
 data = { name: 'donggyun' };
-console.log(typeof data);
+console.log(typeof data); // object
 
 data = [1, 2, 3, 4, 5];
-console.log(typeof data);
+console.log(typeof data); // object
