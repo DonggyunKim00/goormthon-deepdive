@@ -132,7 +132,7 @@
     - `document.body`
     - `document.doctype`
     - `document.cookie`
-  - DOM 특정 요소 작업
+  - DOM 특정 요소 작업(돔 조작)
 
     ```javascript
     const container = document.querySelector('.container');
@@ -193,3 +193,48 @@
   ```
 
   출처: [js 렌더링 최적화 블로그](https://seokzin.tistory.com/entry/JavaScript-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%B5%9C%EC%A0%81%ED%99%94-Reflow%EC%99%80-Repaint)
+
+#### 유사 배열 객체
+
+- Iterable(반복 가능한) collection
+- `Array.from()`: 유사 배열 객체를 배열로 만들어주는 메서드
+
+#### 요소 생성
+
+- createElement
+
+```javascript
+const li = document.createElement('li');
+
+// 클래스 이름 생성
+li.className = 'list-group-item';
+
+// id 생성
+li.id = 'new-item';
+
+// name 생성
+li.setAttribute('name', 'New list item');
+
+// text 생성
+li.appendChild(document.createTextNode('New List Item'));
+```
+
+#### 요소 삭제, 대체
+
+- removeChild: parentNode 에서 해야함!
+
+```javascript
+const listParent = document.querySelectorAll('li');
+listParent.removeChild(list[0]);
+```
+
+- replaceChild: parentNode 에서 해야함!
+  `parentNode.replaceChild(newChild, oldChild)`
+
+```javascript
+const oldE = document.getElementById();
+const newE = document.createElement();
+newE.textContent = 'HI';
+
+oldE.parentNode.replaceChild(newE, oldE);
+```
