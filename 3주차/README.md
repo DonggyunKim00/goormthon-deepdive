@@ -224,7 +224,9 @@ li.appendChild(document.createTextNode('New List Item'));
 - removeChild: parentNode 에서 해야함!
 
 ```javascript
-const listParent = document.querySelectorAll('li');
+const listParent = document.querySelector('ul');
+const list = document.querySelectorAll('li');
+
 listParent.removeChild(list[0]);
 ```
 
@@ -238,3 +240,100 @@ newE.textContent = 'HI';
 
 oldE.parentNode.replaceChild(newE, oldE);
 ```
+
+#### Event Listener & Event 객체
+
+- 이벤트 등록 방법
+
+  - 자바스크립트 코드에서 프로퍼티로 등록
+  - HTML 태그에 속성으로 등록
+  - `addEventListener` 메소드 사용
+
+- 이벤트 객체
+
+```javascript
+const buttonElement = document.querySelector('button');
+buttonElement.addEventListener('click', handleClick);
+
+function handleClick(event) {
+  let val;
+  val = event;
+
+  val = event.target;
+  val = event.target.id;
+  val = event.target.className;
+  val = event.target.classList;
+  val = event.type;
+
+  // 윈도우로부터 거리 좌표
+  val = event.clientY;
+  val = event.clientX;
+
+  // 요소로부터의 거리 좌표
+  val = event.offsetX;
+  val = event.offsetY;
+}
+```
+
+- 이벤트 종류
+  - UI 이벤트: load, change, resize, scroll, error
+  - 키보드 이벤트: keydown, keyup, keypress
+  - 마우스 이벤트: click, dblclick, mousedown, mouseover, mousemove, mouseup
+  - 포커스 이벤트: focus, blur
+  - 폼 이벤트: input, change, select, reset, submit, cut/copy/paste
+
+```javascript
+const submitBtn = document.querySelector('.submit-button');
+const container = document.querySelector('form');
+const title = document.querySelector('h2');
+
+// click => 객체 클릭
+// 위의 이벤트 종류에 따라 addEventListener의 첫번째 인자로 주면됨
+submitBtn.addEventListener('click', handleSubmit);
+
+function handleSubmit(e) {
+  e.preventDefault();
+  console.log(`Event Type: ${e.type}`);
+}
+
+const form = document.querySelector('form');
+const emailInput = document.getElementById('email');
+const title = document.querySelector('h2');
+
+form.addEventListener('submit', handleEvent);
+
+function handleEvent(e) {
+  console.log(`Event Type: ${e.type}`);
+
+  if (e.type === 'submit') {
+    e.preventDefault();
+  }
+
+  title.innerText = e.target.value;
+}
+```
+
+#### 이벤트 버블링, 캡쳐링, 위임
+
+- **이벤트 흐름**
+
+  1. 캡처링 단계 - 이벤트가 하위 요소로 전파
+  2. 타깃 단계 - 이벤트가 실제 타깃 요소에 전달
+  3. 버블링 단계 - 이벤트가 상위 요소로 전파되는 단계
+
+- **이벤트 버블링**: 가장 깊게 중첩된 요소에서 이벤트가 발생 하면, 이벤트가 위로 전달되는 것
+  - `event.target`: 실제 이벤트가 시작된 타겟
+  - `event.currentTarget`: 현재 실행 중인 핸들러가 할당된 요소를 참조
+  - `event.stopPropagation()`: 이벤트 버블링되는 것을 막음 => 억지로 이벤트 버블링을 막는것은 좋지 않음
+  - ( + 사실 이벤트 버블링은 캡처링부터 실행되는 거임 옵션값에 따라 캡쳐링을 안하게 할 수 있음)
+- **이벤트 캡쳐링**: 제일 상단에 있는 요소에서 아래로 이벤트가 내려오는 것
+  - `addEventListener()`: 이 메소드에서 세번째 인자로 true를 주면 캡처링이 잡히게됨
+- **이벤트 위임**: 하위 요소의 이벤트를 상위요소에서 제어하는 것
+  - 이벤트 버블링에 의해 하위의 요소가 상위요소로 전파 되는것을 이용한다.
+  - 상위 요소에 이벤트 리스너를 등록하면 됨
+
+#### this
+
+- Method this: 자기 자신의 객체
+- Function this: 전역 객체
+- Constructor(생성자) 함수 this: 빈 객체

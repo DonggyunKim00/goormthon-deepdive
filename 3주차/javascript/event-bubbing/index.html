@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body * {
+        margin: 10px;
+      }
+
+      form,
+      div,
+      p {
+        border: 2px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <form onclick="alert('form')">
+      FORM
+      <div onclick="alert('div')">
+        DIV
+        <p onclick="alert('p')">P</p>
+      </div>
+    </form>
+  </body>
+
+  <script>
+    const form = document.querySelector('form');
+    const div = document.querySelector('div');
+    const p = document.querySelector('p');
+
+    // div나 p를 클릭했을때 이벤트 버블링이 발생되고 form 까지 onClick 이벤트가 전달됨
+    form.onclick = function (event) {
+      event.target.style.backgroundColor = 'yellow';
+
+      setTimeout(() => {
+        // this는 event.currentTarget이 this임
+        alert('target = ' + event.target.tagName + ', this = ' + this.tagName);
+        event.target.style.backgroundColor = '';
+      }, 0);
+    };
+  </script>
+</html>

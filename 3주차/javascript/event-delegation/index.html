@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="buttons">
+      <button class="buttonClass">Click me</button>
+      <button class="buttonClass">Click me</button>
+    </div>
+  </body>
+  <script>
+    // 이벤트 위임을 사용 X
+    // 이벤트 리스너를 할당 한뒤에 뒤늦게 생성하게 된다면 그 요소는 이벤트 리스너를 받을 수 없음
+    // const buttons = document.getElementsByClassName('buttonClass');
+
+    // for (const button of buttons) {
+    //   button.addEventListener('click', () => alert('clicked'));
+    // }
+
+    // let buttonList = document.querySelector('#buttons');
+    // let button = document.createElement('button');
+
+    // button.setAttribute('class', 'buttonClass');
+    // button.innerText = 'Click me';
+    // buttonList.appendChild(button);
+
+    // 이벤트 위임을 사용 O
+    // 이벤트 버블링을 이용하여 하위요소의 이벤트가 상위요소로 전파되는것을 이용함
+    const buttons = document.getElementById('buttons');
+    buttons.addEventListener('click', () => alert('clicked'));
+
+    let buttonList = document.querySelector('#buttons');
+    let button = document.createElement('button');
+
+    button.setAttribute('class', 'buttonClass');
+    button.innerText = 'Click me';
+    buttonList.appendChild(button);
+  </script>
+</html>
