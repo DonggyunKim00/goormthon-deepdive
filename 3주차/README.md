@@ -337,3 +337,39 @@ function handleEvent(e) {
 - Method this: 자기 자신의 객체
 - Function this: 전역 객체
 - Constructor(생성자) 함수 this: 빈 객체
+
+#### call, apply, bind 메소드
+
+- call, apply
+  - this의 참조를 바꿔주는 메소드
+  - 함수를 호출함!
+  - 두번째 인수부분을 배열로주냐 그냥 리터럴로 주냐의 차이
+  - this 바인딩 + 함수 실행
+  - ex) `fullName.call(person1, 'seoul', 'gwangjingu');`
+  - ex) `fullName.apply(person1, ['seoul', 'gwangjingu']);`
+- bind
+  - this의 참조를 바꿔주는 메소드
+  - 하지만 bind 메소드는 this 바인딩만 함!
+  - this의 참조를 바꿔준 함수를 다른 변수에 할당하여 사용해야함!
+- ex) `const boundFunc = func.bind({name:'hello'})`
+
+#### 이벤트 루프
+
+- 동기: 하나씩 처리 가능
+- 비동기: 병렬적으로 처리 가능
+- **자바스크립트 엔진의 주요 구성요소**
+
+  - 메모리 힙: 메모리 할당이 발생 하는 곳
+  - 호출 스택: 코드가 실행될 때 스택들이 쌓이는 곳
+
+- 콜스택에서 동기적으로 함수를 쌓음 (비동기 함수도 포함)
+- 비동기는 자바스크립트에서 처리 불가능 => Web API(브라우저)에서 처리 가능!
+  ex) setTimeout, AJAX 등등..
+- setTimeout의 시간이 지나서 완료되면 콜백큐로 함수가 들어오게 됨
+- 이벤트루프는 콜스택, 콜백큐를 주시하고 있다가 콜스택이 비게 되면 콜백큐의 대기중이던 함수를 콜스택에 넣음
+
+#### map, filter, reduce
+
+- `map()`: 배열 내의 모든 요소를
+- `filter()`:
+- `reduce()`:
