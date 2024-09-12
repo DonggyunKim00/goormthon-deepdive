@@ -367,9 +367,3 @@ function handleEvent(e) {
   ex) setTimeout, AJAX 등등..
 - setTimeout의 시간이 지나서 완료되면 콜백큐로 함수가 들어오게 됨
 - 이벤트루프는 콜스택, 콜백큐를 주시하고 있다가 콜스택이 비게 되면 콜백큐의 대기중이던 함수를 콜스택에 넣음
-
-#### map, filter, reduce
-
-- `map()`: 배열 내의 모든 요소를
-- `filter()`:
-- `reduce()`:
