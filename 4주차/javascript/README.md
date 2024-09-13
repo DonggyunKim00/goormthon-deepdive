@@ -179,3 +179,223 @@ console.log(JSON.stringify(obj1) === JSON.stringify(obj2));
   // spread operator로 얕은복사를 depth까지 전부 해주면 됨
   const spreadCopy = {...obj,object:{...obj.object}}
   ```
+
+#### 함수 표현식 vs 함수 선언문
+
+- 함수 선언문: `function fn(){...}`
+- 함수 표현식: `const fn = function(){...}`
+
+#### strict mode
+
+- `'use strict'`를 사용하여 엄격하게 문법을 잡아줄 수 있음
+- strict mode 를 사용하지 않으면 아래 예제는 에러를 올바르게 내지 않음
+
+```javascript
+// 예제1
+// 잘못 할당한 식별자를 호출할 수 있음
+let greeting = 'hello';
+
+greating = 'hi';
+console.log(greeting, window.greating);
+
+// 예제2
+// 할당할 수 없는 값에 다른 값을 할당해도 에러가 안남
+undefined = 7;
+NaN = 10;
+'string'.prop = 7;
+
+console.log(undefined);
+console.log(NaN);
+console.log('string'.prop);
+
+// 예제3
+// readonly로 지정한 객체를 재할당해도 에러를 내주지 않음
+// 안바뀌긴 함
+const obj = {};
+
+Object.defineProperty(obj, 'readOnly', { writable: false, value: 7 });
+/*
+{ readonly: 7 } 이라는 객체를 생성 => writable:false로 프로퍼티 재할당 불가능
+ */
+
+console.log(obj);
+obj.readOnly = 10;
+console.log(obj);
+
+// 예제4
+// 매개변수가 중복된 이름으로 들어갔을때 에러를 내주지 않음
+function add(a, a, b) {
+  return a + a + b;
+}
+
+console.log(add(1, 2, 3));
+
+// 예제5
+// strict mode 에서의 함수 안의 this는 undefined 이다!
+function sum(a, b) {
+  console.log(this);
+  return a + b;
+}
+
+console.log(this);
+sum(1, 2);
+// strict mode에서 함수 안의 this를 window객체를 참조 하도록 하는 방법
+// sum.bind(this)(1,2);
+```
+
+#### 순수 함수(Pure Function)
+
+- Same input => Same output (입력값이 같을때 결괏값이 같다)
+- No Side Effects
+  - 외부의 상태를 참조 ❌
+  - 외부의 상태를 변경 ❌
+
+```javascript
+// Same input => Same output
+const add = (x, y) => x + y;
+console.log(add(11, 22));
+
+const fullName = (first, last) => `${first} ${last}`;
+console.log(fullName('Donggyun', 'Kim'));
+
+// No Side Effects
+// 외부 참조 ❌
+const z = 1;
+const sum = (x, y) => x + y + z;
+console.log(sum(10, 20));
+
+// 외부 변경 ❌
+// 1번
+let x = 0;
+const numberUp = () => (x += 1); // 비순수 함수
+console.log(numberUp());
+console.log(x);
+
+const pureNumberUp = (num) => (num += 1); // 순수 함수
+console.log(pureNumberUp(x));
+console.log(x);
+
+// 2번
+const alphabet = ['A', 'B'];
+
+// 비순수 함수
+const addItem = (org, item) => {
+  org.push(item);
+  return org;
+};
+console.log(addItem(alphabet, 'C'));
+console.log(alphabet);
+
+// 순수 함수
+const pureAddItem = (org, item) => {
+  return [...org, item];
+};
+console.log(pureAddItem(alphabet, 'C'));
+console.log(alphabet);
+```
+
+#### 커링(Curry Function)
+
+```javascript
+// 예제1
+const sum = (x, y) => x + y;
+const currySum = (x) => (y) => x + y;
+
+console.log(sum(10, 20));
+console.log(currySum(10)(20));
+
+// 예제2
+const makeFood = (ingredient1) => {
+  return (ingredient2) => {
+    return (ingredient3) => {
+      return `${ingredient1} ${ingredient2} ${ingredient3}`;
+    };
+  };
+};
+
+// 예제3
+const cleanerMakeFood = (ingredient1) => (ingredient2) => (ingredient3) =>
+  `${ingredient1} ${ingredient2} ${ingredient3}`;
+
+const hamburger1 = makeFood('Bread')('Ham')('Tomato');
+const hamburger2 = cleanerMakeFood('Bread')('Ham')('Tomato');
+console.log(hamburger1, hamburger2);
+
+// 예제4
+// 매개변수를 여러가지 갖는 함수를 커링으로 변환하는 과정!
+function log(date, importance, message) {
+  alert(`[${date.getHours()}, ${importance}, ${message}]`);
+}
+
+const curry = (f) => (a) => (b) => (c) => f(a, b, c);
+const curriedLog = curry(log);
+curriedLog(new Date())('DEBUG')('some debug');
+
+let logNow = curriedLog(new Date());
+logNow('INFO')('messageeeeeee');
+```
+
+#### 자바스크립트 엔진
+
+- interpreter: 한줄씩 번역, 분석
+- compiler: 한번에 기계어로 변환
+- JIT Compiler: interpreter 와 compiler 두가지를 합쳐놓은 것
+- 엔진 종류
+  - 크롬: V8
+  - FireFox: 스파이더몽키
+  - 사파리: 자바스크립트 코어
+  - 익스프로러: 차크라
+
+#### IIFE(즉시 호출 함수 표현식)
+
+- 정의되자마자 즉시 실행(호출)되는 JS 함수를 말한다.
+- 기본적인 형태: `(function(){})()`
+- 첫번째 `()`: 전역 선언을 막고, IIFE 내부 안으로 다른 변수의 접근을 막음
+- 두번째 `()`: 즉시 호출
+
+```javascript
+// 예제1
+(function () {
+  var aName = 'Barry';
+})();
+// IIFE 내부에서 정의된 변수 외부 범위 접근 X
+console.log(aName); // ReferenceError
+
+// 예제2
+var result = (function () {
+  var name = 'Barry';
+  return name;
+})();
+
+console.log(result); // Barry
+
+// 예제3
+// 익명 함수의 조건
+// 1. 함수를 할당 받을 변수 지정
+// 2. 함수 즉시 호출
+
+(function (a, b) {
+  return a - b;
+})(1, 2); // 즉시 실행 함수 인자 넘기기
+
+// 예제4
+// IIFE를 변수에 할당하면 함수 자체가 저장되지 않음
+// 함수가 실행된 결과를 저장함
+const score = () => {
+  let count = 0;
+  return {
+    current: () => count,
+    increment: () => count++,
+    reset: () => (count = 0),
+  };
+};
+
+console.log(score);
+/*
+  {
+    current:f,
+    increment:f,
+    reset:f
+  }
+*/
+```
