@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
-export default class ExpenseItem extends Component {
-  render() {
-    return (
-      <li>
-        <div>
-          <span></span>
-          <span>원</span>
-        </div>
-        <div>
-          <button>
-            <MdEdit />
-          </button>
-          <button>
-            <MdDelete />
-          </button>
-        </div>
-      </li>
-    );
-  }
-}
+const ExpenseItem = ({ expense, handleDelete, handleEdit }) => {
+  return (
+    <li>
+      <div>
+        <span>{expense.charge}</span>
+        <span>{expense.amount}원</span>
+      </div>
+      <div>
+        <button onClick={() => handleEdit(expense.id)}>
+          <MdEdit />
+        </button>
+        <button onClick={() => handleDelete(expense.id)}>
+          <MdDelete />
+        </button>
+      </div>
+    </li>
+  );
+};
+
+export default ExpenseItem;
