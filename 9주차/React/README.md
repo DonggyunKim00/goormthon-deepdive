@@ -59,3 +59,12 @@ const Test = () => {
   );
 };
 ```
+
+## 리액트의 생명주기
+
+<img width='700' src='https://github.com/user-attachments/assets/ddc9691c-490d-4409-a5a7-4870aea1e9ff'>
+
+## React.memo() 란?
+
+- React.memo로 둘러 쌓여 있다면 컴포넌트를 렌더링하고 결과를 메모이징 한다.
+- 그리고 다음 렌더링이 일어날 때 렌더링 하는 컴포넌트의 props가 같다면 React는 메모이징된 내용을 재사용한다.
