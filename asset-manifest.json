@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/goormthon-deepdive/9%EC%A3%BC%EC%B0%A8/React/react-app/static/css/main.9c3b6770.css",
+    "main.js": "/goormthon-deepdive/9%EC%A3%BC%EC%B0%A8/React/react-app/static/js/main.363f4218.js",
+    "index.html": "/goormthon-deepdive/9%EC%A3%BC%EC%B0%A8/React/react-app/index.html",
+    "main.9c3b6770.css.map": "/goormthon-deepdive/9%EC%A3%BC%EC%B0%A8/React/react-app/static/css/main.9c3b6770.css.map",
+    "main.363f4218.js.map": "/goormthon-deepdive/9%EC%A3%BC%EC%B0%A8/React/react-app/static/js/main.363f4218.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9c3b6770.css",
+    "static/js/main.363f4218.js"
+  ]
+}
