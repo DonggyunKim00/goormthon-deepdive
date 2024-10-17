@@ -16,7 +16,7 @@ const ExpenseList = ({ ...props }) => {
           );
         })}
       </ul>
-      <button>목록 지우기</button>
+      <button onClick={props.clearItems}>목록 지우기</button>
     </>
   );
 };

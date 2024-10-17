@@ -6,6 +6,7 @@ const ExpenseForm = ({
   amount,
   handleAmount,
   handleSubmit,
+  isEditing,
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -33,7 +34,7 @@ const ExpenseForm = ({
           />
         </div>
       </div>
-      <button type="submit">제출</button>
+      <button type="submit">{isEditing ? '수정' : '제출'}</button>
     </form>
   );
 };
