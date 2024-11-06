@@ -69,3 +69,49 @@ const Test = () => {
 - React.memo로 둘러 쌓여 있다면 컴포넌트를 렌더링하고 결과를 메모이징 한다.
 - 그리고 다음 렌더링이 일어날 때 렌더링 하는 컴포넌트의 props가 같다면 React는 메모이징된 내용을 재사용한다.
 - props가 잘 변하지 않는 부분에 메모이제이션을 해주면 성능 개선 효과를 기대할 수 있음
+
+## useRef
+
+- 실제 DOM의 요소를 등록함
+- 등록된 요소는 `{ current: $요소 }` 형식으로 등록됨
+- 등록된 current를 직접 변경해도 리렌더링 되지않음
+- ## 리액트의 리렌더링 조건
+
+## Ref, State, Variable의 차이
+
+- Ref: 값은 변경되도 반영이 안됨 => 리렌더링이 안되기 때문
+- State: 값이 변경될때마다 리렌더링됨
+- Variable: 값은 변경됨 => 하지만 리렌더링되면 다시 초기값으로 돌아감
+
+## forwardRef
+
+- 컴포넌트에 props 로 `ref`를 넘길 수 없음
+- ex: `key` 는 유니크한 값을 명시하는것 이기때문에 props로 내려줄 수 없음
+- `ref` 를 props로 넘기기 위해서는 `forwardRef` 를 사용해야함
+- 또한 해당 ref를 받는 함수의 두번째 파라미터로 명시해야함
+
+```javascript
+// ParentComponent.js
+const ParentComponent = () => {
+  const ref = useRef();
+  return (
+    <div>
+      <ChildComponent ref={ref} />
+    </div>
+  );
+};
+
+// ChildComponent.js
+const ChildComponent = (props, ref) => {
+  return <input ref={ref} />;
+};
+
+export default forwardRef(ChildComponent);
+```
+
+## React Portal
+
+- 부모 컴포넌트의 DOM 계층 구조 바깥에 있는 DOM 노드로 자식을 렌더링함
+- `ReactDOM.createPortal(child, container)`
+- 첫 번째 인자(child)는 엘리먼트, 문자열, fragment 등 어떤 종류든 렌더링할 수 있는 React 자식
+- 두 번째 인자(container)는 DOM 엘리먼트
