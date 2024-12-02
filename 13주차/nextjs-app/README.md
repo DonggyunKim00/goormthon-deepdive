@@ -1,40 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+## 리액트에서의 데이터 fetching 과정
 
-## Getting Started
+1. user -> localhost:3000
+2. component state 생성
+3. retrun UI 렌더링
+4. useEffect 실행
+5. 비동기 요청 데이터 fetching
+6. 데이터 state 보관
+7. state 변경 컴포넌트 리렌더링
 
-First, run the development server:
+## Nextjs의 데이터 fetch
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+#### `getStaticProps`
+
+- 프로젝트를 빌드할 때 데이터를 불러옴
+- 데이터 fetch 과정(빌드타임에 일어남)
+  - 1. npm run build
+  - 2. 비동기 요청 데이터 fetching
+  - 3. props 넘김
+  - 4. pre-render HTML 생성
+
+```javascript
+// posts will be populated at build time by getStaticProps()
+export default function Blog({ posts }) {
+  // pre-render 된 HTML이 만들어짐
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side, so you can even do
+// direct database queries.
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
+  const res = await fetch('https://.../posts');
+  const posts = await res.json();
+
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      posts,
+    },
+  };
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### `getStaticPaths`
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- 데이터에 기반하여 pre-render시 특정한 동적 라우팅 구현(`pages/post/[id].js`)
+- 동적 라우팅이 필요할 때 getStaticPaths로 경로 리스트를 정의하고, HTML에 빌드 타임에 렌더됨
+- 데이터 fetch 과정(빌드타임에 일어남)
+  - 1. 동적 경로의 모든 경로 가져오기
+  - 2. getStaticProps의 params로 가져온 경로에 대해서 HTML 생성하기
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```javascript
+// 경로 가져오기
+export async function getStaticPaths() {
+  // Call an external API endpoint to get posts
+  const res = await fetch('https://.../posts');
+  const posts = await res.json();
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+  // Get the paths we want to prerender based on posts
+  // In production environments, prerender all pages
+  // (slower builds, but faster initial page load)
+  const paths = posts.map((post) => ({
+    params: { id: post.id },
+  }));
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  // { fallback: false } means other routes should 404
+  return { paths, fallback: false };
+}
 
-## Learn More
+export async function getStaticProps({ params }) {
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
+  const res = await fetch(`https://.../posts/${params.id}`);
+  const posts = await res.json();
 
-To learn more about Next.js, take a look at the following resources:
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      posts,
+    },
+  };
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+#### `getServerSideProps`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 요청이 있을때 데이터를 불러옴
+- 데이터가 계속 변해야되는 경우 사용
+- 개인화된 사용자 데이터나 요청 시에만 알 수 있는 정보에 의존하는 페이지를 렌더링해야 하는 경우 사용
+- 요청 시점에 데이터를 가져올 필요가 없거나 데이터와 사전 렌더링된 HTML을 캐시하려는 경우에는 `getStaticProps`를 사용하는 것이 좋습니다
 
-## Deploy on Vercel
+```javascript
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+type Repo = {
+  name: string
+  stargazers_count: number
+}
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+export const getServerSideProps = (async () => {
+  // Fetch data from external API
+  const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const repo: Repo = await res.json()
+  // Pass data to the page via props
+  return { props: { repo } }
+}) satisfies GetServerSideProps<{ repo: Repo }>
+
+export default function Page({
+  repo,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  return (
+    <main>
+      <p>{repo.stargazers_count}</p>
+    </main>
+  )
+}
+
+```
+
+## File System Route

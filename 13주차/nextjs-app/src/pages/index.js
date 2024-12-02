@@ -1,18 +1,9 @@
-import Image from 'next/image';
-import localFont from 'next/font/local';
+import { getSortedPostsData } from '../utils/getSortedPostsData';
+import Link from 'next/link';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-});
+export default function Home({ allPostsData }) {
+  console.log(allPostsData);
 
-export default function Home() {
   return (
     <div>
       <section>
@@ -21,8 +12,28 @@ export default function Home() {
       </section>
       <section>
         <h2>Blog</h2>
-        <ul>build time</ul>
+        <ul>
+          {allPostsData.map(({ id, title, date }) => (
+            <li key={id}>
+              <Link href={`/posts/${id}`}>{title}</Link>
+              <br />
+              <small>{date}</small>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );
 }
+
+// build time, server side
+export const getStaticProps = async () => {
+  const allPostsData = getSortedPostsData();
+
+  console.log(allPostsData);
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
