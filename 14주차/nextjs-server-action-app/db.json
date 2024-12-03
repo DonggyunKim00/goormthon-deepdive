@@ -1,0 +1,10 @@
+{
+  "todos": [
+    {
+      "id": "c0dc",
+      "userId": 1,
+      "title": "밥먹기",
+      "completed": true
+    }
+  ]
+}
